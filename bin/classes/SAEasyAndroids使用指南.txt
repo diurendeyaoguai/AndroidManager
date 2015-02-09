@@ -1,0 +1,35 @@
+SAEasyAndroids框架使用指南，欢迎Fork And Commit，技术不分国界，开源成就未来！
+
+SAEasyAndroids（Single Activity EasyAndroids）是一个在EasyAndroids（我积累的另一个框架）基础上的开源快速开发框架，是我在日常开发中的积累以及思索！这套框架包含了很多的常用工具类，以及封装简化的思维。这个框架实现全局只有一个Activity，将界面分割为3份，Top、Middle、Bottom；分别对应TopManager，UIManager、BottomManager！使用观察者模式，根据Middle的切换实现Top与Bottom的自动切换！直接将SAEasyAndroids拿来作为基础进行一般的Android开发是没有问题的，学习其中的代码思维也是可以的！这个框架我将会日后进行长期的完善与更新。鉴于本人水平所限，难免有错误或者是冗余的情况，欢迎大家指正修改，共同进步！
+
+简介：
+1.BaseView的抽取；
+2.注解实现的Sqlite数据库的封装；
+3.全局的细节管理；
+4.常用开源框架的集成；例如Json解析、AsyncHttpClient等；
+5.工具类：IO、File、Log、UI、View、Drawable等的常用常用封装；安全、健壮；
+6.基于线程池的Http请求、处理封装；
+7.图片加载的简化以及与之相关的内存处理；
+
+具体：
+1.全局只使用一个Activity，最核心的是中间UIManager的removeAllViews()与addView()方法实现界面的切换，使用了观察者模式根据中间Middle的切换实现Top与Bottom的自动切换！
+2.BaseView的抽取，抽象方法：
+抽象方法init()进行控件的加载、进行数据的获取；
+setListener()进行控件的监听！
+getId()：给每一个MiddleView唯一的标示！（也就是根据这个标示进行的Top与Bottom的切换）
+3.因为全局只有一个Activity，我们需要覆写onBackPressed()方法将后退键重新按照我们的方式进行处理！在UIManager中我们自己利用LinkedList模拟了一个任务栈，每一次切换界面我们将当前界面加入到任务栈的栈顶，按返回键的时候调用我们覆写的onBackPressed()方法，去调用UIManager中的goBack()方法，对任务栈进行处理，还有判断到了任务栈最后一个元素的时候才去提示用户是否退出！
+4.Adapter的封装与强化：接受一个参数List<T>设置抽象getViewItem()方法强制调用者覆写，一般性的操作不再重复的写！实现：往顶部与底部添加数据信息！
+5.设置全局的Application，实现程序异常终止时候的优雅关闭并且实现程序的重启，提升用户体验！低内存的时候发送广播，强制回收内存空间，避免OOM异常！
+6.数据库的封装，使用泛型、注解将JavaBean对象属性与数据库表的各列进行对应，不写SQL语句，方便简单的实现CRUD操作！
+7.嵌入开源框架FastJson对Json数据进行解析，附带Demo！
+8.嵌入开源框架AsyncHttpClient联网并发库实现网络的连接！
+9.嵌入开源框架Universal_ImageLoader进行图片的获取、显示处理！
+10.使用工厂模式进行解耦！
+11.关于Image的常用工具集合，以及加载缩略图的实现！
+12.全局的Log管理、以及错误信息的SD卡保存！
+13.SharedPreference的方便使用！
+14.全局的提示管理！
+
+注意事项：1.之前我们每次有新的界面都是使用的是Activity，这里有新的界面使用的是View的添加与清除！普通的新建一个Activity就相当于这里新建一个View！
+2.使用数据库封装的时候需要确保：JavaBean对象的属性与数据库表各列一一对应！
+3.不管使用哪种方式加载图片进行try catch的包裹，OutOfMemoryError！是错误，不是异常，使用Exception包裹还是无法捕获！
