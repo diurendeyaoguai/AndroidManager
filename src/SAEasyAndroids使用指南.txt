@@ -1,6 +1,6 @@
 SAEasyAndroids框架使用指南，欢迎Fork And Commit，技术不分国界，开源成就未来！
 
-SAEasyAndroids（Single Activity EasyAndroids）是一个在EasyAndroids（我积累的另一个框架）基础上的开源快速开发框架，是我在日常开发中的积累以及思索！这套框架包含了很多的常用工具类，以及封装简化的思维。这个框架实现全局只有一个Activity，将界面分割为3份，Top、Middle、Bottom；分别对应TopManager，UIManager、BottomManager！使用观察者模式，根据Middle的切换实现Top与Bottom的自动切换！直接将SAEasyAndroids拿来作为基础进行一般的Android开发是没有问题的，学习其中的代码思维也是可以的！这个框架我将会日后进行长期的完善与更新。鉴于本人水平所限，难免有错误或者是冗余的情况，欢迎大家指正修改，共同进步！
+SAEasyAndroids（Single Activity EasyAndroids）是一个开源快速开发框架，是我在日常开发中的积累以及思索！这套框架包含了很多的常用工具类，以及封装简化的思维。这个框架实现全局只有一个Activity，将界面分割为3份，Top、Middle、Bottom；分别对应TopManager，UIManager、BottomManager！使用观察者模式，根据Middle的切换实现Top与Bottom的自动切换！直接将SAEasyAndroids拿来作为基础进行一般的Android开发是没有问题的，学习其中的代码思维也是可以的！这个框架我将会日后进行长期的完善与更新。鉴于本人水平所限，难免有错误或者是冗余的情况，欢迎大家指正修改，共同进步！
 
 简介：
 1.BaseView的抽取；
